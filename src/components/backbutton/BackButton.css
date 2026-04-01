@@ -1,0 +1,53 @@
+.back-btn {
+  position: fixed;
+  top: 75px;
+  left: 20px;
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 10px;
+  border-radius: 999px;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+
+  color: #2f2d73;
+  font-weight: 600;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  transition: all 0.3s ease;
+}
+
+/* ICON */
+.back-btn svg {
+  font-size: 14px;
+}
+
+/* HOVER */
+.back-btn:hover {
+  background: #2f2d73;
+  color: white;
+  box-shadow: 0 12px 30px rgba(47, 45, 115, 0.3);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .back-btn {
+    top: 75px;
+    left: 12px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .back-btn span {
+    display: none; /* mobile la icon only */
+  }
+}

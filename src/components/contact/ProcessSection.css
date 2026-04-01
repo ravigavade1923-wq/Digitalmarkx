@@ -1,0 +1,441 @@
+.process-section {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 18px 70px;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(80, 72, 180, 0.06), transparent 22%),
+    radial-gradient(circle at 85% 18%, rgba(255, 43, 62, 0.07), transparent 24%),
+    linear-gradient(180deg, #f7f8fc 0%, #f3f5fa 100%);
+}
+
+.process-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.glow-1 {
+  width: 220px;
+  height: 220px;
+  background: rgba(80, 72, 180, 0.12);
+  left: -60px;
+  top: 80px;
+  animation: floatGlow 8s ease-in-out infinite;
+}
+
+.glow-2 {
+  width: 240px;
+  height: 240px;
+  background: rgba(255, 48, 62, 0.12);
+  right: -80px;
+  bottom: 60px;
+  animation: floatGlow 10s ease-in-out infinite reverse;
+}
+
+.process-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.process-header {
+  text-align: center;
+  margin-bottom: 54px;
+}
+
+.process-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(112, 120, 160, 0.14);
+  color: #4a488f;
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(20, 24, 40, 0.05);
+  margin-bottom: 14px;
+}
+
+.process-header h2 {
+  margin: 0 0 10px;
+  font-size: 2.75rem;
+  line-height: 1.08;
+  font-weight: 800;
+  color: #2f2d73;
+  letter-spacing: -1px;
+}
+
+.process-header h2 span {
+  color: #ff2d3e;
+}
+
+.process-header p {
+  margin: 0 auto;
+  max-width: 620px;
+  color: #667089;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.process-chain-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 38px 26px;
+  align-items: start;
+  padding-top: 18px;
+}
+
+.chain-backbone,
+.chain-connector {
+  position: absolute;
+  pointer-events: none;
+}
+
+.chain-backbone {
+  top: 16px;
+  bottom: 72px;
+  width: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 10px, #b6bccd 0 4px, transparent 4.4px) 50% 0/14px 22px repeat-y,
+    linear-gradient(90deg, #cfd5e2, #9fa8bc, #d5dbe8);
+  border-radius: 99px;
+  opacity: 0.45;
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+.backbone-left {
+  left: 33.33%;
+}
+
+.backbone-right {
+  left: 66.66%;
+}
+
+.chain-connector {
+  height: 14px;
+  left: 16.5%;
+  right: 16.5%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 10px 50%, #b6bccd 0 4px, transparent 4.4px) 0 50%/22px 14px repeat-x,
+    linear-gradient(180deg, #59597d, #525262, #8f97a8);
+  border-radius: 99px;
+  opacity: 0.4;
+}
+
+.connector-top {
+  top: 88px;
+}
+
+.connector-mid {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.connector-bottom {
+  bottom: 34px;
+}
+
+.process-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(130, 140, 170, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 14px 34px rgba(15, 18, 35, 0.08);
+  overflow: visible;
+  transform-origin: top center;
+  animation: hangingFloat 4.6s ease-in-out infinite;
+}
+
+.process-1 { animation-delay: 0s; }
+.process-2 { animation-delay: 0.4s; }
+.process-3 { animation-delay: 0.8s; }
+.process-4 { animation-delay: 1.2s; }
+.process-5 { animation-delay: 1.6s; }
+.process-6 { animation-delay: 2s; }
+
+.chain-hanger {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.chain-hanger span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #fdfdfd, #cfd4df 45%, #9aa5bb 70%);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    0 2px 4px rgba(65, 72, 90, 0.15);
+  position: relative;
+}
+
+.chain-hanger span::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+}
+
+.process-card-top {
+  position: relative;
+  min-height: 76px;
+  padding: 18px 18px 16px 48px;
+  display: flex;
+  align-items: center;
+  border-radius: 18px 18px 0 0;
+}
+
+.process-card-top.blue {
+  background: linear-gradient(135deg, #3b378f 0%, #2f2d73 100%);
+}
+
+.process-card-top.red {
+  background: linear-gradient(135deg, #ff2134 0%, #f60017 100%);
+}
+
+.step-badge {
+  position: absolute;
+  left: -10px;
+  top: -12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f47b7 0%, #ff3040 100%);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 18px rgba(47, 45, 115, 0.22);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+}
+
+.process-card-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.process-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.process-card-top h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.process-card-body {
+  padding: 16px 18px 18px;
+}
+
+.process-card-body p {
+  margin: 0 0 16px;
+  color: #5f6780;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+
+.learn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  color: #3b378f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.learn-link:hover {
+  color: #ff2337;
+  transform: translateX(4px);
+}
+
+.process-cta-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 34px;
+}
+
+.process-cta-btn {
+  border: none;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #3b378f 0%, #ff2134 100%);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(47, 45, 115, 0.16);
+  transition: all 0.3s ease;
+}
+
+.process-cta-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 30px rgba(47, 45, 115, 0.22);
+}
+
+@keyframes hangingFloat {
+  0%, 100% {
+    transform: rotate(-0.6deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(0.8deg) translateY(6px);
+  }
+}
+
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-14px) translateX(8px);
+  }
+}
+
+/* laptop */
+@media (max-width: 1100px) {
+  .process-chain-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+
+  .backbone-left {
+    left: 50%;
+  }
+
+  .backbone-right,
+  .connector-mid,
+  .connector-bottom {
+    display: none;
+  }
+
+  .connector-top {
+    left: 24%;
+    right: 24%;
+    top: 90px;
+  }
+}
+
+/* tablet */
+@media (max-width: 768px) {
+  .process-section {
+    padding: 70px 14px 56px;
+  }
+
+  .process-header {
+    margin-bottom: 38px;
+  }
+
+  .process-header h2 {
+    font-size: 2rem;
+  }
+
+  .process-header p {
+    font-size: 0.9rem;
+  }
+
+  .process-chain-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 8px;
+  }
+
+  .chain-backbone,
+  .chain-connector {
+    display: none;
+  }
+
+  .process-card {
+    animation: mobileFloat 4.5s ease-in-out infinite;
+  }
+
+  .process-card-top {
+    min-height: 70px;
+    padding: 16px 16px 14px 44px;
+  }
+
+  .process-card-body {
+    padding: 14px 16px 16px;
+  }
+
+  .process-card-top h3 {
+    font-size: 1rem;
+  }
+
+  .process-card-body p {
+    font-size: 0.82rem;
+  }
+
+  .process-cta-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@keyframes mobileFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* small mobile */
+@media (max-width: 480px) {
+  .process-header h2 {
+    font-size: 1.7rem;
+  }
+
+  .process-badge {
+    font-size: 0.68rem;
+    padding: 6px 12px;
+  }
+
+  .process-card-top {
+    padding-left: 42px;
+  }
+
+  .step-badge {
+    width: 34px;
+    height: 34px;
+    font-size: 0.8rem;
+  }
+
+  .process-card-body p {
+    font-size: 0.8rem;
+    line-height: 1.75;
+  }
+}

@@ -1,0 +1,486 @@
+.wm-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(70, 75, 255, 0.24), transparent 30%),
+    radial-gradient(circle at 85% 80%, rgba(255, 0, 72, 0.16), transparent 28%),
+    linear-gradient(135deg, #17154d 0%, #08081f 48%, #02020d 100%);
+}
+
+.wm-loader-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
+  background-size: 70px 70px;
+  pointer-events: none;
+}
+
+.wm-loader-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.75;
+}
+
+.wm-glow-one {
+  width: 280px;
+  height: 280px;
+  background: rgba(80, 95, 255, 0.22);
+  top: 10%;
+  left: 10%;
+  animation: wmFloatOne 8s ease-in-out infinite;
+}
+
+.wm-glow-two {
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 0, 76, 0.18);
+  right: 8%;
+  bottom: 10%;
+  animation: wmFloatTwo 5s ease-in-out infinite;
+}
+
+.wm-glow-three {
+  width: 220px;
+  height: 220px;
+  background: rgba(0, 153, 255, 0.14);
+  left: 48%;
+  top: 18%;
+  transform: translateX(-50%);
+  animation: wmFloatThree 7s ease-in-out infinite;
+}
+
+.wm-loader-glass {
+  position: relative;
+  z-index: 3;
+  width: min(92vw, 420px);
+  padding: 42px 30px 30px;
+  border-radius: 32px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.11),
+    rgba(255, 255, 255, 0.05)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wm-loader-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 32px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.03),
+    rgba(79, 94, 255, 0.22)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.wm-loader-wrap {
+  position: relative;
+  width: 210px;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  margin-bottom: 18px;
+}
+
+.wm-loader-ring {
+  position: absolute;
+  border-radius: 50%;
+  border-style: solid;
+  transform-style: preserve-3d;
+}
+
+.wm-ring-one {
+  width: 110px;
+  height: 110px;
+  border-width: 4px;
+  border-color: #ffffff transparent transparent #ffffff;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.35));
+  animation: wmRotateClock 1.4s linear infinite;
+}
+
+.wm-ring-two {
+  width: 142px;
+  height: 142px;
+  border-width: 4px;
+  border-color: transparent #ff1d46 #ff1d46 transparent;
+  filter: drop-shadow(0 0 16px rgba(255, 29, 70, 0.45));
+  animation: wmRotateAnti 2s linear infinite;
+}
+
+.wm-ring-three {
+  width: 172px;
+  height: 172px;
+  border-width: 4px;
+  border-color: rgba(63, 120, 255, 0.95) transparent transparent rgba(63, 120, 255, 0.95);
+  filter: drop-shadow(0 0 18px rgba(63, 120, 255, 0.45));
+  animation: wmRing3D 2.6s linear infinite;
+}
+
+.wm-ring-four {
+  width: 196px;
+  height: 196px;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 8px rgba(255,255,255,0.015),
+    inset 0 0 20px rgba(255,255,255,0.03);
+  animation: wmPulseRing 2.8s ease-in-out infinite;
+}
+
+.wm-loader-core {
+  position: relative;
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #ff3157 0%, #cc0028 65%, #92001b 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 14px rgba(255,255,255,0.03),
+    0 0 55px rgba(255, 24, 76, 0.34),
+    inset 0 10px 20px rgba(255,255,255,0.14),
+    inset 0 -12px 20px rgba(0,0,0,0.28);
+  animation: wmCorePulse 2.2s ease-in-out infinite;
+  z-index: 5;
+}
+
+.wm-logo-reveal {
+  width: 58px;
+  height: 58px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: wmLogoReveal 1s ease forwards;
+}
+
+.wm-loader-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.6) rotate(-10deg);
+  filter: drop-shadow(0 2px 10px rgba(255,255,255,0.22));
+  animation: wmLogoPop 1s ease 0.2s forwards, wmLogoBreath 2s ease-in-out 1.3s infinite;
+}
+
+.wm-loader-brand {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-shadow: 0 8px 30px rgba(255,255,255,0.12);
+}
+
+.wm-loader-text {
+  margin-bottom: 18px;
+}
+
+.wm-shimmer-text {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: rgba(255,255,255,0.78);
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.42) 0%,
+    #ffffff 35%,
+    rgba(255,255,255,0.42) 70%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: wmShimmer 2s linear infinite;
+}
+
+.wm-progress {
+  width: 100%;
+  max-width: 240px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.24);
+}
+
+.wm-progress-line {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #3f78ff 0%, #ffffff 45%, #ff2348 100%);
+  box-shadow:
+    0 0 14px rgba(63,120,255,0.45),
+    0 0 24px rgba(255,35,72,0.35);
+  animation: wmProgress 1.5s ease-in-out infinite;
+}
+
+.wm-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wm-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  filter: blur(0.5px);
+  opacity: 0.75;
+  animation: wmParticleFloat 6s ease-in-out infinite;
+}
+
+.wm-particle:nth-child(odd) {
+  background: rgba(255, 45, 88, 0.9);
+  box-shadow: 0 0 14px rgba(255, 45, 88, 0.55);
+}
+
+.wm-particle:nth-child(even) {
+  background: rgba(73, 128, 255, 0.95);
+  box-shadow: 0 0 16px rgba(73, 128, 255, 0.55);
+}
+
+.wm-particle-1 { top: 14%; left: 18%; animation-delay: 0s; }
+.wm-particle-2 { top: 20%; right: 20%; animation-delay: 0.4s; }
+.wm-particle-3 { top: 30%; left: 10%; animation-delay: 0.8s; }
+.wm-particle-4 { top: 34%; right: 12%; animation-delay: 1s; }
+.wm-particle-5 { top: 48%; left: 16%; animation-delay: 1.2s; }
+.wm-particle-6 { top: 54%; right: 18%; animation-delay: 1.4s; }
+.wm-particle-7 { bottom: 24%; left: 12%; animation-delay: 1.6s; }
+.wm-particle-8 { bottom: 18%; right: 14%; animation-delay: 1.8s; }
+.wm-particle-9 { top: 16%; left: 46%; animation-delay: 2s; }
+.wm-particle-10 { bottom: 16%; left: 44%; animation-delay: 2.2s; }
+.wm-particle-11 { top: 22%; left: 30%; animation-delay: 2.4s; }
+.wm-particle-12 { top: 26%; right: 32%; animation-delay: 2.6s; }
+.wm-particle-13 { bottom: 28%; left: 26%; animation-delay: 2.8s; }
+.wm-particle-14 { bottom: 26%; right: 30%; animation-delay: 3s; }
+.wm-particle-15 { top: 42%; left: 6%; animation-delay: 3.2s; }
+.wm-particle-16 { top: 44%; right: 8%; animation-delay: 3.4s; }
+.wm-particle-17 { bottom: 10%; left: 20%; animation-delay: 3.6s; }
+.wm-particle-18 { bottom: 10%; right: 20%; animation-delay: 3.8s; }
+
+@keyframes wmRotateClock {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wmRotateAnti {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes wmRing3D {
+  0% {
+    transform: rotateX(70deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(70deg) rotateZ(360deg);
+  }
+}
+
+@keyframes wmPulseRing {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes wmCorePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes wmLogoReveal {
+  0% {
+    clip-path: inset(100% 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes wmLogoPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes wmLogoBreath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes wmShimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -20% center;
+  }
+}
+
+@keyframes wmProgress {
+  0% {
+    width: 0%;
+    transform: translateX(0);
+  }
+  55% {
+    width: 75%;
+    transform: translateX(0);
+  }
+  100% {
+    width: 100%;
+    transform: translateX(0);
+  }
+}
+
+@keyframes wmParticleFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-18px) scale(1.25);
+    opacity: 1;
+  }
+}
+
+@keyframes wmFloatOne {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(35px, -20px); }
+}
+
+@keyframes wmFloatTwo {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, 24px); }
+}
+
+@keyframes wmFloatThree {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(24px); }
+}
+
+@media (max-width: 768px) {
+  .wm-loader-glass {
+    width: min(92vw, 360px);
+    padding: 34px 20px 24px;
+    border-radius: 26px;
+  }
+
+  .wm-loader-wrap {
+    width: 170px;
+    height: 170px;
+  }
+
+  .wm-loader-core {
+    width: 82px;
+    height: 82px;
+  }
+
+  .wm-loader-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .wm-logo-reveal {
+    width: 50px;
+    height: 50px;
+  }
+
+  .wm-ring-one {
+    width: 98px;
+    height: 98px;
+  }
+
+  .wm-ring-two {
+    width: 124px;
+    height: 124px;
+  }
+
+  .wm-ring-three {
+    width: 148px;
+    height: 148px;
+  }
+
+  .wm-ring-four {
+    width: 168px;
+    height: 168px;
+  }
+
+  .wm-loader-brand {
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+
+  .wm-shimmer-text {
+    font-size: 14px;
+  }
+}
+
+
+.wm-page-content {
+  opacity: 0;
+  transform: translateY(26px) scale(0.99);
+  filter: blur(8px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease,
+    filter 0.7s ease;
+}
+
+.wm-page-content.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
