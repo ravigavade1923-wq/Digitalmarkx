@@ -100,13 +100,15 @@ const ContactPage = () => {
       setSubmitMessage("Email service is not configured properly.");
       return;
     }
+
     try {
       setIsSubmitting(true);
 
-      // ✅ SAVE TO DATABASE
-      await axios.post("http://localhost:5000/api/contact-enquiries", data);
+      await contactApi.post("/", {
+        ...data,
+        source: "Website Contact Form",
+      });
 
-      // ✅ EMAIL SEND
       const templateParams = {
         first_name: data.firstName,
         last_name: data.lastName,
@@ -130,7 +132,10 @@ const ContactPage = () => {
       generateCaptcha();
     } catch (error) {
       console.error("Form Submit Error:", error);
-      setSubmitMessage("Failed to send message. Please try again.");
+      setSubmitMessage(
+        error.response?.data?.message ||
+          "Failed to send message. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }

@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../navbar/Navbar";
 import emailjs from "@emailjs/browser";
+import contactApi from "../../api/contactApi";
 
 // ICONS
 import {
@@ -226,6 +227,18 @@ const Home = () => {
     setSubmitMessage("");
 
     try {
+      await contactApi.post("/", {
+        firstName: formData.fullName?.trim(),
+        lastName: "-",
+        company: formData.companyName?.trim() || "",
+        email: formData.email?.trim(),
+        phone: formData.phone?.trim(),
+        service: "General Enquiry",
+        message: `Homepage enquiry submitted by ${formData.fullName}.`,
+        privacy: "Accepted",
+        source: "Homepage Enquiry Popup",
+      });
+
       await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
@@ -252,13 +265,17 @@ const Home = () => {
         closeLeadModal();
       }, 1200);
     } catch (error) {
-      console.error("EmailJS Error:", error);
-      setSubmitMessage("Something went wrong. Please try again.");
+      console.error("Lead form error:", error);
+      setSubmitMessage(
+        error.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  
   return (
     <>
       <Navbar />
@@ -266,8 +283,6 @@ const Home = () => {
       {showLeadModal && (
         <div className="wm-lead-overlay">
           <div className="wm-lead-modal">
-        
-
             <div className="wm-lead-content single-form-layout">
               <div className="wm-lead-form-card">
                 <div className="form-orb-1"></div>
@@ -362,75 +377,73 @@ const Home = () => {
       )}
 
       <section className="lefthero">
-        
-          <div className="hero-left premium-3d">
-            <div className="hero-bg-blur blur-one"></div>
-            <div className="hero-bg-blur blur-two"></div>
-            <div className="hero-bg-blur blur-three"></div>
+        <div className="hero-left premium-3d">
+          <div className="hero-bg-blur blur-one"></div>
+          <div className="hero-bg-blur blur-two"></div>
+          <div className="hero-bg-blur blur-three"></div>
 
-            <div className="hero-light-ray"></div>
-            <div className="hero-noise"></div>
-            <div className="hero-reflection"></div>
+          <div className="hero-light-ray"></div>
+          <div className="hero-noise"></div>
+          <div className="hero-reflection"></div>
 
-            <div className="floating-glass glass-one"></div>
-            <div className="floating-glass glass-two"></div>
+          <div className="floating-glass glass-one"></div>
+          <div className="floating-glass glass-two"></div>
 
-            <div className="badge-container">
-              <span className="badge move">
-                <span className="badge-dot"></span>
-                DIGITAL MARKETING EXCELLENCE
-              </span>
+          <div className="badge-container">
+            <span className="badge move">
+              <span className="badge-dot"></span>
+              DIGITAL MARKETING EXCELLENCE
+            </span>
+          </div>
+
+          <div className="title-stack">
+            <p className="hero-kicker">NEXT-GEN GROWTH STRATEGIES</p>
+
+            <h1 className="hero-title">
+              <span className="line line-one">TRANSFORMING</span>
+              <span className="line line-two">DIGITAL</span>
+              <span className="line line-three">LANDSCAPES</span>
+            </h1>
+
+            <span className="title-outline">WEBMARKX</span>
+          </div>
+
+          <p className="hero-description">
+            Welcome to <b>WEBMARKX</b>, where data-driven strategies meet
+            creativity to fuel your business success.
+          </p>
+
+          <div className="hero-stats">
+            <div className="stat-card">
+              <h4>360°</h4>
+              <span>Brand Strategy</span>
             </div>
-
-            <div className="title-stack">
-              <p className="hero-kicker">NEXT-GEN GROWTH STRATEGIES</p>
-
-              <h1 className="hero-title">
-                <span className="line line-one">TRANSFORMING</span>
-                <span className="line line-two">DIGITAL</span>
-                <span className="line line-three">LANDSCAPES</span>
-              </h1>
-
-              <span className="title-outline">WEBMARKX</span>
+            <div className="stat-card">
+              <h4>3D</h4>
+              <span>Visual Identity</span>
             </div>
-
-            <p className="hero-description">
-              Welcome to <b>WEBMARKX</b>, where data-driven strategies meet
-              creativity to fuel your business success.
-            </p>
-
-            <div className="hero-stats">
-              <div className="stat-card">
-                <h4>360°</h4>
-                <span>Brand Strategy</span>
-              </div>
-              <div className="stat-card">
-                <h4>3D</h4>
-                <span>Visual Identity</span>
-              </div>
-              <div className="stat-card">
-                <h4>ROI+</h4>
-                <span>Performance</span>
-              </div>
-            </div>
-
-            <div className="btn-group">
-              <Link to="/contact">
-                <button className="primary-btn">
-                  <span className="btn-shine"></span>
-                  <span>Get Started 🚀</span>
-                </button>
-              </Link>
-
-              <Link to="/services">
-                <button className="secondary-btn">
-                  <span className="btn-shine"></span>
-                  <span>▶ Our Services</span>
-                </button>
-              </Link>
+            <div className="stat-card">
+              <h4>ROI+</h4>
+              <span>Performance</span>
             </div>
           </div>
-       
+
+          <div className="btn-group">
+            <Link to="/contact">
+              <button className="primary-btn">
+                <span className="btn-shine"></span>
+                <span>Get Started 🚀</span>
+              </button>
+            </Link>
+
+            <Link to="/services">
+              <button className="secondary-btn">
+                <span className="btn-shine"></span>
+                <span>▶ Our Services</span>
+              </button>
+            </Link>
+          </div>
+        </div>
 
         <section className="hero">
           <div className="hero-right">

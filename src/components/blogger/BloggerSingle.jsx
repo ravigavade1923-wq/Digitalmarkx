@@ -34,10 +34,10 @@ const BloggerSingle = () => {
       return pdfUrl;
     }
 
-    const baseURL =
-      blogApi.defaults.baseURL?.replace(/\/api\/?$/, "") || "http://localhost:5000";
+    const apiBase = import.meta.env.VITE_API_URL || "";
+    const serverBase = apiBase.replace(/\/api\/?$/, "");
 
-    return `${baseURL}${pdfUrl}`;
+    return `${serverBase}${pdfUrl}`;
   };
 
   if (loading) {

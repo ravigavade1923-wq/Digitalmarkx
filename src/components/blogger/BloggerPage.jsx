@@ -14,9 +14,14 @@ const BloggerPage = () => {
 
   const fetchBlogs = async () => {
     try {
-      const savedUser = JSON.parse(localStorage.getItem("user"));
-      const domain = savedUser?.domainName || "";
-      const query = domain ? `?domain=${encodeURIComponent(domain)}` : "";
+      const currentDomain =
+        window.location.hostname === "localhost"
+          ? ""
+          : window.location.hostname.replace(/^www\./, "");
+
+      const query = currentDomain
+        ? `?domain=${encodeURIComponent(currentDomain)}`
+        : "";
 
       const { data } = await blogApi.get(`/blogs/public${query}`);
       const blogList = Array.isArray(data) ? data : [];
@@ -48,7 +53,7 @@ const BloggerPage = () => {
       (blog) =>
         blog.title?.toLowerCase().includes(lowerSearch) ||
         blog.excerpt?.toLowerCase().includes(lowerSearch) ||
-        blog.domainName?.toLowerCase().includes(lowerSearch)
+        blog.domainName?.toLowerCase().includes(lowerSearch),
     );
 
     setFilteredBlogs(filtered);
@@ -64,8 +69,9 @@ const BloggerPage = () => {
           <div className="wm-blog-hero-badge">WEBMARKS INSIGHTS</div>
           <h1>Latest Blogs & Marketing Insights</h1>
           <p>
-            Explore professional insights, strategy articles, and knowledge-driven
-            blogs dynamically published through your admin panel.
+            Explore professional insights, strategy articles, and
+            knowledge-driven blogs dynamically published through your admin
+            panel.
           </p>
 
           <div className="wm-blog-search-wrap">
@@ -86,7 +92,9 @@ const BloggerPage = () => {
               {filteredBlogs.map((blog) => (
                 <article className="wm-blog-card" key={blog._id || blog.slug}>
                   <div className="wm-blog-card-top">
-                    <span className="wm-blog-domain">{blog.domainName || "General"}</span>
+                    <span className="wm-blog-domain">
+                      {blog.domainName || "General"}
+                    </span>
                     <span className="wm-blog-date">
                       {blog.createdAt
                         ? new Date(blog.createdAt).toLocaleDateString()
