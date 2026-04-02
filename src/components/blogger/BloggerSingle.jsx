@@ -27,18 +27,18 @@ const BloggerSingle = () => {
     fetchSingleBlog();
   }, [slug]);
 
-  const getPdfUrl = (pdfUrl) => {
-    if (!pdfUrl) return "";
+ const getPdfUrl = (pdfUrl) => {
+  if (!pdfUrl) return "";
 
-    if (pdfUrl.startsWith("http://") || pdfUrl.startsWith("https://")) {
-      return pdfUrl;
-    }
+  if (pdfUrl.startsWith("http://") || pdfUrl.startsWith("https://")) {
+    return pdfUrl;
+  }
 
-    const apiBase = import.meta.env.VITE_API_URL || "";
-    const serverBase = apiBase.replace(/\/api\/?$/, "");
+  const apiBase = import.meta.env.VITE_API_URL || "";
+  const serverBase = apiBase.replace(/\/api\/?$/, "");
 
-    return `${serverBase}${pdfUrl}`;
-  };
+  return `${serverBase}${pdfUrl}`;
+};
 
   if (loading) {
     return (
