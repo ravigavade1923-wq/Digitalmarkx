@@ -27,18 +27,19 @@ const BloggerSingle = () => {
     fetchSingleBlog();
   }, [slug]);
 
- const getPdfUrl = (pdfUrl) => {
-  if (!pdfUrl) return "";
+  const getPdfUrl = (pdfUrl) => {
+    if (!pdfUrl) return "";
 
-  if (pdfUrl.startsWith("http://") || pdfUrl.startsWith("https://")) {
-    return pdfUrl;
-  }
+    if (pdfUrl.startsWith("http://") || pdfUrl.startsWith("https://")) {
+      return pdfUrl;
+    }
 
-  const apiBase = import.meta.env.VITE_API_URL || "";
-  const serverBase = apiBase.replace(/\/api\/?$/, "");
+    const apiBase =
+      import.meta.env.VITE_API_URL || "https://blogadmin-0fj9.onrender.com/api";
+    const serverBase = apiBase.replace(/\/api\/?$/, "");
 
-  return `${serverBase}${pdfUrl}`;
-};
+    return `${serverBase}${pdfUrl}`;
+  };
 
   if (loading) {
     return (
@@ -111,7 +112,7 @@ const BloggerSingle = () => {
                 </div>
 
                 <iframe
-                  src={pdfFullUrl}
+                  src={`${pdfFullUrl}#toolbar=0&navpanes=0&scrollbar=1`}
                   title={blog.title || "Blog PDF"}
                   className="wm-blog-pdf-frame"
                 />
