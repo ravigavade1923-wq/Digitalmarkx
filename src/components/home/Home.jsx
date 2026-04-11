@@ -41,6 +41,15 @@ const Home = () => {
     companyName: "",
   });
 
+
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setShowLeadModal(true);
+  }, 1000);
+
+  return () => clearTimeout(timer);
+}, []);
+
   useEffect(() => {
     const cards = document.querySelectorAll(".card");
     const cleanups = [];
@@ -439,6 +448,14 @@ const Home = () => {
           </div>
 
           <div className="btn-group">
+
+              <button
+    className="primary-btn"
+    onClick={() => setShowLeadModal(true)}
+  >
+    <span className="btn-shine"></span>
+    <span>Enquiry Form</span>
+  </button>
             <Link to="/contact">
               <button className="primary-btn">
                 <span className="btn-shine"></span>
