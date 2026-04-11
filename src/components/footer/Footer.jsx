@@ -37,7 +37,14 @@ const Footer = () => {
         {/* Column 1 */}
         <div className="footer-col footer-brand">
           <div className="footer-logo">
-            <img src={logo} alt="WebMarkx Logo" />
+            <img
+              src={logo}
+              alt="WebMarkx Logo"
+              width="180"
+              height="60"
+              loading="lazy"
+              decoding="async"
+            />
             <h2>WEBMARKX</h2>
           </div>
 

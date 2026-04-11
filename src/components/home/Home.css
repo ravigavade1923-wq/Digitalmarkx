@@ -2041,8 +2041,7 @@ margin-left: 10px;;
 }
 
 
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap");
-
+ 
 /* ========= PAGE BLUR WHILE MODAL OPEN ========= */
 .page-blur-active {
   filter: blur(10px);

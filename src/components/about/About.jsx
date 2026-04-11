@@ -70,13 +70,13 @@ const services = [
   "Social Media Marketing",
   "Web Development",
   "E-Commerce Solution",
-   "Ui/Ux Design",
+  "Ui/Ux Design",
   "PPC Advertising",
   "Content Marketing",
   "Email Marketing",
   "Branding & Design",
   "Technical Support",
-  "Digital Strategy Consulting"
+  "Digital Strategy Consulting",
 ];
 
 const AboutPage = () => {
@@ -122,7 +122,7 @@ const AboutPage = () => {
 
   return (
     <>
-    <BackButton/>
+      <BackButton />
       <Navbar />
       <section className="about-hero-section">
         <div className="about-hero-container">
@@ -253,7 +253,14 @@ const AboutPage = () => {
               }}
             >
               <div className="card-bg">
-                <img src={`${card.img}?q=80&w=1200`} alt="" />
+                <img
+                  src={`${card.img}?q=70&w=900&auto=format`}
+                  alt={card.title}
+                  width="900"
+                  height="700"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
 
               <div className="card-overlay"></div>
@@ -481,15 +488,12 @@ const AboutPage = () => {
             </motion.div>
           </div>
         </section>
-       
-
-      
       </section>
-       <Achievements/>
+      <Achievements />
 
-       <Testimonials/>
+      <Testimonials />
 
-       <BlogCTA/>
+      <BlogCTA />
 
       <Footer />
     </>

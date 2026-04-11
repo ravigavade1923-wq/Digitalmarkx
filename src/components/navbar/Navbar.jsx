@@ -101,7 +101,13 @@ const Navbar = () => {
     <nav className="navbar" ref={navRef}>
       <div className="logo">
         <Link to="/">
-          <img src={Logo} alt="WebMarkx Logo" />
+          <img
+            src={Logo}
+            alt="WebMarkx Logo"
+            width="180"
+            height="60"
+            decoding="async"
+          />
         </Link>
       </div>
 

@@ -59,18 +59,20 @@ export default function BenefitsSection() {
 
           <div className="image-box">
             <img
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-              alt=""
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=70"
+              alt="Team working on growth strategy"
+              width="900"
+              height="700"
+              loading="lazy"
+              decoding="async"
             />
-           
-  <div className="badger">
-    <span className="badger-value">100%</span>
-    <span className="badger-text">Growth</span>
-  </div>
+
+            <div className="badger">
+              <span className="badger-value">100%</span>
+              <span className="badger-text">Growth</span>
+            </div>
           </div>
         </div>
-
-        
 
         {/* RIGHT */}
         <div className="right">
@@ -118,14 +120,16 @@ export default function BenefitsSection() {
               <a href="#">🏆</a> Proven Results
               <span>Track record of successful campaigns</span>
             </div>
-            <p >
+            <p>
               Our comprehensive digital solutions are designed to elevate your
               brand, engage your audience, and deliver tangible business
               outcomes through cutting-edge technology and creative strategies.
             </p>
           </div>
 
-          <Link to="/contact"><button className="cta-btn">Get Started Today →</button></Link>
+          <Link to="/contact">
+            <button className="cta-btn">Get Started Today →</button>
+          </Link>
         </div>
       </div>
     </section>

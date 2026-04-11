@@ -49,8 +49,6 @@ const ContactPage = () => {
   const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
- 
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
@@ -239,7 +237,14 @@ const ContactPage = () => {
               viewport={{ once: true }}
               whileHover={{ y: -6 }}
             >
-              <img src={contactImg} alt="Customer support team" />
+              <img
+                src={contactImg}
+                alt="Customer support team"
+                width="900"
+                height="700"
+                loading="lazy"
+                decoding="async"
+              />
             </motion.div>
           </motion.div>
 

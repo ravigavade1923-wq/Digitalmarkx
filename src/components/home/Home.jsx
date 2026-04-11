@@ -6,7 +6,6 @@ import Navbar from "../navbar/Navbar";
 import emailjs from "@emailjs/browser";
 import contactApi from "../../api/contactApi";
 
-// ICONS
 import {
   FaFacebookF,
   FaInstagram,
@@ -44,26 +43,41 @@ const Home = () => {
 
   useEffect(() => {
     const cards = document.querySelectorAll(".card");
+    const cleanups = [];
 
-    cards.forEach((card) => {
-      const handleMouseMove = (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    if (window.innerWidth > 991) {
+      cards.forEach((card) => {
+        let frameId = null;
 
-        const rotateX = -(y - rect.height / 2) / 10;
-        const rotateY = (x - rect.width / 2) / 10;
+        const handleMouseMove = (e) => {
+          if (frameId) cancelAnimationFrame(frameId);
 
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-      };
+          frameId = requestAnimationFrame(() => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
-      const handleMouseLeave = () => {
-        card.style.transform = "rotateX(0) rotateY(0)";
-      };
+            const rotateX = -(y - rect.height / 2) / 16;
+            const rotateY = (x - rect.width / 2) / 16;
 
-      card.addEventListener("mousemove", handleMouseMove);
-      card.addEventListener("mouseleave", handleMouseLeave);
-    });
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+          });
+        };
+
+        const handleMouseLeave = () => {
+          if (frameId) cancelAnimationFrame(frameId);
+          card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+        };
+
+        card.addEventListener("mousemove", handleMouseMove, { passive: true });
+        card.addEventListener("mouseleave", handleMouseLeave);
+
+        cleanups.push(() => {
+          card.removeEventListener("mousemove", handleMouseMove);
+          card.removeEventListener("mouseleave", handleMouseLeave);
+        });
+      });
+    }
 
     const elements = document.querySelectorAll(".animate");
 
@@ -72,6 +86,7 @@ const Home = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("show");
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -87,71 +102,71 @@ const Home = () => {
     if (el) {
       gsap.fromTo(
         el.querySelector(".about-title"),
-        { y: 60, opacity: 0 },
+        { y: 40, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.8,
           scrollTrigger: {
             trigger: el,
             start: "top 80%",
+            once: true,
           },
         },
       );
 
       gsap.fromTo(
         el.querySelector(".about-image"),
-        { x: -120, opacity: 0 },
+        { x: -80, opacity: 0 },
         {
           x: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.8,
           scrollTrigger: {
             trigger: el,
             start: "top 75%",
+            once: true,
           },
         },
       );
 
       gsap.fromTo(
         el.querySelector(".about-content"),
-        { x: 120, opacity: 0 },
+        { x: 80, opacity: 0 },
         {
           x: 0,
           opacity: 1,
-          duration: 1,
-          delay: 0.2,
+          duration: 0.8,
+          delay: 0.1,
           scrollTrigger: {
             trigger: el,
             start: "top 75%",
+            once: true,
           },
         },
       );
 
       gsap.fromTo(
         el.querySelectorAll(".card"),
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          stagger: 0.2,
-          duration: 0.8,
+          stagger: 0.15,
+          duration: 0.6,
           scrollTrigger: {
             trigger: el,
             start: "top 70%",
+            once: true,
           },
         },
       );
     }
 
-    const timer = setTimeout(() => {
-      setShowLeadModal(true);
-      document.body.style.overflow = "hidden";
-    }, 1400);
-
     return () => {
-      clearTimeout(timer);
-      document.body.style.overflow = "auto";
+      observer.disconnect();
+      cleanups.forEach((fn) => fn());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -165,40 +180,37 @@ const Home = () => {
 
   useEffect(() => {
     const card = document.querySelector(".wm-lead-form-card");
-    if (!card) return;
+    if (!card || window.innerWidth <= 768) return;
+
+    let frameId = null;
 
     const handleMove = (e) => {
-      if (window.innerWidth <= 768) return;
+      if (frameId) cancelAnimationFrame(frameId);
 
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      frameId = requestAnimationFrame(() => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      const rotateX = ((y - rect.height / 2) / rect.height) * -6;
-      const rotateY = ((x - rect.width / 2) / rect.width) * 6;
+        const rotateX = ((y - rect.height / 2) / rect.height) * -4;
+        const rotateY = ((x - rect.width / 2) / rect.width) * 4;
 
-      card.style.transform = `
-      perspective(1600px)
-      rotateX(${rotateX}deg)
-      rotateY(${rotateY}deg)
-      translateY(-6px)
-    `;
+        card.style.transform = `
+        perspective(1600px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        translateY(-4px)
+      `;
+      });
     };
 
     const resetMove = () => {
+      if (frameId) cancelAnimationFrame(frameId);
       card.style.transform =
         "perspective(1600px) rotateX(0deg) rotateY(0deg) translateY(0px)";
     };
 
-    card.addEventListener("mousemove", handleMove);
-    card.addEventListener("mouseleave", resetMove);
-
-    return () => {
-      card.removeEventListener("mousemove", handleMove);
-      card.removeEventListener("mouseleave", resetMove);
-    };
-
-    card.addEventListener("mousemove", handleMove);
+    card.addEventListener("mousemove", handleMove, { passive: true });
     card.addEventListener("mouseleave", resetMove);
 
     return () => {
@@ -206,7 +218,6 @@ const Home = () => {
       card.removeEventListener("mouseleave", resetMove);
     };
   }, [showLeadModal]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -275,7 +286,6 @@ const Home = () => {
     }
   };
 
-  
   return (
     <>
       <Navbar />
@@ -476,8 +486,13 @@ const Home = () => {
 
               <div className="image-circle">
                 <img
-                  src="https://images.unsplash.com/photo-1557804506-669a67965ba0"
+                  src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=900&q=75"
                   alt="team"
+                  width="900"
+                  height="900"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               <div className="brand">
@@ -501,9 +516,14 @@ const Home = () => {
         <div className="about-container">
           <div className="about-image">
             <img
-              src="https://i.pinimg.com/736x/7e/6f/e3/7e6fe3488b60391e6c9f8b3d7ba382f9.jpg"
+              src=" https://i.pinimg.com/736x/7e/6f/e3/7e6fe3488b60391e6c9f8b3d7ba382f9.jpg"
               alt="team"
+              width="900"
+              height="1000"
+              loading="lazy"
+              decoding="async"
             />
+
             <div className="overlay">
               <h3>Our Passionate Team</h3>
               <p>Driving your digital success</p>
@@ -526,7 +546,11 @@ const Home = () => {
                 <div className="icon-box blue">
                   <img
                     src="https://img.icons8.com/?size=100&id=5NjoP1iD5kon&format=png&color=228BE6"
-                    alt=""
+                    alt="Strategic Growth Icon"
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 
@@ -735,7 +759,11 @@ const Home = () => {
           <div className="rocket">
             <img
               src="https://em-content.zobj.net/source/animated-noto-color-emoji/427/rocket_1f680.gif"
-              alt=""
+              alt="Rocket"
+              width="120"
+              height="120"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

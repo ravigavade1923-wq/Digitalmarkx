@@ -5,6 +5,8 @@ import Navbar from "../navbar/Navbar";
 import { Link } from "react-router-dom";
 import Footer from "../footer/Footer";
 
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://blogadmin-0fj9.onrender.com/api";
 const plans = [
   {
     id: "starter",
@@ -129,7 +131,7 @@ export default function PricingPlans() {
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/pricing-inquiry", {
+      const res = await fetch(`${API_URL.replace(/\/$/, "")}/pricing-inquiry`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -489,7 +491,7 @@ export default function PricingPlans() {
         </section>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 }
